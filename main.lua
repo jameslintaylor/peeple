@@ -13,7 +13,7 @@ function love.keypressed(key, scancode, isrepeat)
     peeple.is_evil = not peeple.is_evil
   end
 end
- 
+
 function love.update(dt)
   speed = peeple.is_evil and 20 or 2
   if love.keyboard.isDown("left") then
@@ -28,10 +28,10 @@ function love.update(dt)
 end
  
 function love.draw()
+  love.graphics.setBackgroundColor(255,255,255)
   if peeple.is_evil then
     love.graphics.draw(evil_img, peeple.x, peeple.y, 0, 0.02)
   else
     love.graphics.draw(normal_img, peeple.x, peeple.y, 0, 0.02)
   end
 end
-
