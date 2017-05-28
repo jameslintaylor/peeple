@@ -40,4 +40,35 @@ end
 
 exports.csetmetatable = csetmetatable
 
+function reverse(tbl)
+  for i=1, math.floor(#tbl / 2) do
+    tbl[i], tbl[#tbl - i + 1] = tbl[#tbl - i + 1], tbl[i]
+  end
+end
+
+exports.reverse = reverse
+
+function map(f, seq)
+  mapped = {}
+  for i, element in ipairs(seq) do
+    mapped[i] = f(element)
+  end
+  return mapped
+end
+
+exports.map = map
+
+function take(n, seq)
+  taken = 0
+  took = {}
+  while taken < n do
+    i = taken + 1
+    took[i] = seq[i]
+    taken = taken + 1
+  end
+  return took
+end
+
+exports.take = take
+
 return exports

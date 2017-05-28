@@ -1,37 +1,43 @@
-evil_img = nil
-normal_img = nil
-peeple = {x = 0, y = 0, is_evil = false}
+animations = require "animations"
+
+abs = nil
+
+peeple = {
+  frame = nil,
+  x = 400,
+  y = 200,
+  is_running = false,
+  state = "walking-left"
+}
 
 function love.load()
-
-  evil_img = love.graphics.newImage('pp-06.png')
-  normal_img = love.graphics.newImage('pp-08.png')
+  abs = animations.box_set()
 end
 
 function love.keypressed(key, scancode, isrepeat)
-  if key == "space" then
-    peeple.is_evil = not peeple.is_evil
+  if key == "lshift" then
+    peeple.is_running = not peeple.is_running
   end
 end
 
 function love.update(dt)
-  speed = peeple.is_evil and 20 or 2
+  
+  -- ;_;
+  speed = peeple.is_running and 5 or 2
+  
   if love.keyboard.isDown("left") then
     peeple.x = peeple.x - speed
-  elseif love.keyboard.isDown("up") then
-    peeple.y = peeple.y - speed
+    peeple.state = peeple.is_running and "running-left" or "walking-left"
   elseif love.keyboard.isDown("right") then
     peeple.x = peeple.x + speed
-  elseif love.keyboard.isDown("down") then
-    peeple.y = peeple.y + speed
-  end 
+    peeple.state = peeple.is_running and "running-right" or "walking-right"
+  else
+    peeple.state = "chilling"
+  end
+  peeple.frame = abs[peeple.state]:pop_frame(dt)
 end
  
 function love.draw()
   love.graphics.setBackgroundColor(255,255,255)
-  if peeple.is_evil then
-    love.graphics.draw(evil_img, peeple.x, peeple.y, 0, 0.02)
-  else
-    love.graphics.draw(normal_img, peeple.x, peeple.y, 0, 0.02)
-  end
+  love.graphics.draw(peeple.frame, peeple.x, peeple.y, 0, 0.05)
 end
