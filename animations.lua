@@ -65,13 +65,15 @@ function box_set()
   walking_right = animation(map(load_resource, map(c_prefix("walking-right-"), take(8, numbered))), 0.1)
   running_left = animation(map(load_resource, map(c_prefix("running-left-"), take(8, numbered))), 0.1)
   running_right = animation(map(load_resource, map(c_prefix("running-right-"), take(8, numbered))), 0.1)
+  jumping = animation(map(load_resource, map(c_prefix("extreme-jump-right-"), take(15, numbered))), 0.1)
 
   return {
     ["chilling"] = AnimationBox:new(animation({love.graphics.newImage("resources/chilling.png")}, 1)),
     ["walking-left"] = AnimationBox:new(walking_left),
     ["walking-right"] = AnimationBox:new(walking_right),
     ["running-left"] = AnimationBox:new(running_left),
-    ["running-right"] = AnimationBox:new(running_right)
+    ["running-right"] = AnimationBox:new(running_right),
+    ["jumping"] = AnimationBox:new(jumping)
   }
 end
 
